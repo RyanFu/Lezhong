@@ -7,7 +7,8 @@ import {
   StyleSheet,
   Modal,
   TouchableHighlight,
-  Alert
+  Alert,
+  StatusBar
 } from 'react-native';
 import { observer } from 'mobx-react'
 import Button from 'apsl-react-native-button'

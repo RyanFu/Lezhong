@@ -1,10 +1,14 @@
 package com.lezhong;
+// 启动页
 import android.os.Bundle; // here
 // react-native-splash-screen >= 0.3.1
 import org.devio.rn.splashscreen.SplashScreen; // here
 // react-native-splash-screen < 0.3.1
 // import com.cboy.rn.splashscreen.SplashScreen; // here
 import com.facebook.react.ReactActivity;
+// 方向
+import android.content.Intent; // <--- import
+import android.content.res.Configuration; // <--- import
 
 public class MainActivity extends ReactActivity {
 
@@ -20,5 +24,12 @@ public class MainActivity extends ReactActivity {
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen.show(this);  // here
         super.onCreate(savedInstanceState);
+    }
+    @Override
+     public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Intent intent = new Intent("onConfigurationChanged");
+        intent.putExtra("newConfig", newConfig);
+        this.sendBroadcast(intent);
     }
 }

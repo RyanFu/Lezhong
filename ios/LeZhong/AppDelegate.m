@@ -12,6 +12,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import "SplashScreen.h"  // here
+#import "Orientation.h" // <--- import
 
 @implementation AppDelegate
 
@@ -34,6 +35,10 @@
   [self.window makeKeyAndVisible];
   [SplashScreen show];  // here
   return YES;
+}
+
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  return [Orientation getOrientation];
 }
 
 @end

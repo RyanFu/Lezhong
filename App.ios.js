@@ -35,7 +35,7 @@ const RootStack = StackNavigator({
     Home: {screen: Home}
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
     navigationOptions: {
       headerStyle: {
         backgroundColor: Color.dangerColor,

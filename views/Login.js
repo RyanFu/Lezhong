@@ -54,7 +54,7 @@ class Login extends React.Component {
           hidden={true}
         />
         <View style={styles.inputBox}>
-          <View style={{height: 200}}/>
+          <View style={{height: 50}}/>
           <View style={{height: 100, width: '100%'}}>
             <TextInput style={styles.userName}
                        placeholder="手机号"
@@ -76,11 +76,10 @@ class Login extends React.Component {
 
           </View>
           <View style={styles.linkView}>
-            <Text style={styles.registered} onPress={() => navigate('Registered')}>注册</Text>
+            <TouchableHighlight style={styles.registered} onPress={() => navigate('Registered')}><Text>注册</Text></TouchableHighlight>
             <View style={{flex: 1}}></View>
-            <Text style={styles.forget} onPress={() => navigate('Forget')}>忘记密码？</Text>
+            <TouchableHighlight style={styles.forget} onPress={() => navigate('Forget')}><Text>忘记密码？</Text></TouchableHighlight>
           </View>
-          <View style={{flex: 1}}></View>
           <View style={styles.othenLink}>
             <Text style={{color: Color.defaultColor}}>其他登录方式</Text>
             <Text onPress={() => navigate('Registered')}>
@@ -137,20 +136,16 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     padding: 10,
-    height: 80
+    height: 50
   },
   registered: {
-    width: 100,
-    textAlign: 'left',
-    color: Color.defaultColor
+    width: 50
   },
   forget: {
-    width: 120,
-    textAlign: 'right',
-    color: Color.defaultColor
+    width: 100
   },
   othenLink: {
-    height: 100
+    flex: 1
   },
   icon: {
     width: 80,

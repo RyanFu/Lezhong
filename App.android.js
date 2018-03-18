@@ -13,6 +13,7 @@ import {observable} from 'mobx'
 import store from './stores'
 import {Color} from './theme/thme'
 import SplashScreen from 'react-native-splash-screen'
+import Orientation from 'react-native-orientation'
 
 import Login from './views/Login'
 import Home from './views/Home'
@@ -34,7 +35,7 @@ const RootStack = StackNavigator({
     Home: {screen: Home}
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
     navigationOptions: {
       headerStyle: {
         backgroundColor: Color.dangerColor,
@@ -42,7 +43,8 @@ const RootStack = StackNavigator({
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
-      }
+      },
+      header: null
     },
   }
 )
@@ -51,8 +53,14 @@ const RootStack = StackNavigator({
 class App extends React.Component {
   @observable passed = 0
 
+  componentWillMount() {
+    const initial = Orientation.getInitialOrientation();
+    Orientation.lockToLandscapeLeft()
+  }
+
   componentDidMount() {
     SplashScreen.hide()
+
   }
 
   render() {
@@ -60,6 +68,7 @@ class App extends React.Component {
       <RootStack store={store}/>
     );
   }
+
 }
 
 export default App

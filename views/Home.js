@@ -3,11 +3,19 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
+  ImageBackground,
   StatusBar,
   TouchableHighlight
 } from 'react-native';
 import {observer} from "mobx-react";
+import { observable, action } from "mobx";
+
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+import Tips from '../components/Tips'
+
+// modal
+import GoOutModal from '../components/modal/GooutModal'
 
 @observer
 class Home extends React.Component {
@@ -16,44 +24,39 @@ class Home extends React.Component {
     header: null,
     headerTransparent: true
   }
+  @observable goOutOpen = false
 
+  @action.bound openGoOutModal () {
+    this.goOutOpen = true
+  }
+  @action.bound closeGoOutModal () {
+    this.goOutOpen = false
+  }
   render() {
     return (
       <View style={styles.container}>
+        <ImageBackground
+          style={styles.bg}
+          source={require('../static/img/home-bg4.jpg')}
+        >
         <StatusBar
           hidden={true}
         />
-        <View style={styles.header}>
-          <View style={styles.goOutView}>
-            <TouchableHighlight>
-              <Text>退出</Text>
-            </TouchableHighlight>
-          </View>
-          <View style={styles.userView}>
-            <Image source={require('../static/img/weixin.png')} style={styles.headerImg}/>
-            <Text style={styles.username}>名称</Text>
-          </View>
-          <View style={styles.goldView}>
-            <Image source={require('../static/img/weixin.png')} style={styles.goldImg}/>
-            <Text style={styles.username}>名称</Text>
-          </View>
-          <View style={styles.diamondView}>
-            <Image source={require('../static/img/weixin.png')} style={styles.goldImg}/>
-            <Text style={styles.username}>名称</Text>
-          </View>
-          <View style={styles.messageView}>
-            <Text>站内信</Text>
-          </View>
-          <View style={styles.messageView}>
-            <Text>设置</Text>
-          </View>
+        <Header
+          openGoOutModal={this.openGoOutModal}
+        />
+        <Tips/>
+        <View style={styles.body}>
+            <Text>主体</Text>
         </View>
-        <View style={styles.tips}>
-          <Text>消息</Text>
-        </View>
+        <Footer/>
+        </ImageBackground>
+        <GoOutModal closeModal={this.closeGoOutModal} open={this.goOutOpen}/>
       </View>
     );
   }
+
+
 }
 
 const styles = StyleSheet.create({
@@ -63,46 +66,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     width: '100%'
   },
-  header: {
-    flexDirection: 'row',
-    height: 50,
+  bg: {
     width: '100%',
-    backgroundColor: 'rgba(0,11,3,.5)'
+    height: '100%'
   },
-  headerImg: {
-    width: 50,
-    height: 50
+  body: {
+    flex: 1,
+    width: '100%'
   },
-  username: {
-    height: 50,
-    lineHeight: 50
-  },
-  goOutView: {
-    flexDirection: 'row',
-    width: 100
-  },
-  userView: {
-    flexDirection: 'row',
-    width: 200
-  },
-  goldView: {
-    flexDirection: 'row',
-    flex: 1
-  },
-  diamondView: {
-    flexDirection: 'row',
-    flex: 1
-  },
-  messageView: {
-    width: 50
-  },
-  goldImg: {
-    width: 30,
-    height: 30
-  },
-  tips: {
-    height: 40
-  }
+
 })
 
 export default Home

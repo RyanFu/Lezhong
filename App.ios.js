@@ -68,7 +68,6 @@ class App extends React.Component {
       <RootStack store={store}/>
     );
   }
-
 }
 
 export default App

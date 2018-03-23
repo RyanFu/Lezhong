@@ -13,6 +13,7 @@ import { observable, action } from "mobx";
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Tips from '../components/Tips'
+// import Alipay from 'react-native-yunpeng-alipay';
 
 // modal
 import GoOutModal from '../components/modal/GooutModal'
@@ -32,6 +33,13 @@ class Home extends React.Component {
   @action.bound closeGoOutModal () {
     this.goOutOpen = false
   }
+  // onAlipay() {
+  //   Alipay.pay("signed pay info string").then(function(data){
+  //     console.log(data);
+  //   }, function (err) {
+  //     console.log(err);
+  //   })
+  // }
   render() {
     return (
       <View style={styles.container}>
@@ -55,7 +63,6 @@ class Home extends React.Component {
       </View>
     );
   }
-
 
 }
 

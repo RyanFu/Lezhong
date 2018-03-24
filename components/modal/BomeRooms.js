@@ -5,7 +5,8 @@ import {
   View,
   TouchableOpacity,
   Image,
-  ImageBackground
+  ImageBackground,
+  FlatList
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
 import { observer } from "mobx-react";
@@ -17,18 +18,19 @@ import { observable, action } from "mobx";
 
 @observer
 class BomeRooms extends React.Component {
-  @observable roomType = [
-    {id: 1, name: '初级场（<50）'},
-    {id: 2, name: '中级场（50-100）'},
-    {id: 3, name: '高级场（100-500）'},
-    {id: 4, name: '至尊场（500-2000）'}
-  ]
-
   @observable rooms = {
     1: [
       {id: 11, name: '5-10包/1-2倍'},
       {id: 12, name: '5-10包/1-2倍'},
-      {id: 13, name: '5-10包/1-2倍'}
+      {id: 13, name: '5-10包/1-2倍'},
+      {id: 14, name: '5-10包/1-2倍'},
+      {id: 15, name: '5-10包/1-2倍'},
+      {id: 16, name: '5-10包/1-2倍'},
+      {id: 17, name: '5-10包/1-2倍'},
+      {id: 18, name: '5-10包/1-2倍'},
+      {id: 19, name: '5-10包/1-2倍'},
+      {id: 111, name: '5-10包/1-2倍'},
+      {id: 112, name: '5-10包/1-2倍'},
     ],
     2: [
       {id: 11, name: '5-10包/1-2倍'},
@@ -45,6 +47,42 @@ class BomeRooms extends React.Component {
       {id: 12, name: '5-10包/1-2倍'},
       {id: 13, name: '5-10包/1-2倍'}
     ],
+  }
+  @observable nowType = 1
+  @observable roomTypes = [
+    {id: 1, name: '初级场（<50）'},
+    {id: 2, name: '中级场（50-100）'},
+    {id: 3, name: '高级场（100-500）'},
+    {id: 4, name: '至尊场（500-2000）'}
+  ]
+
+  renderRoom ({item}) {
+    return (
+      <View
+        style={styles.roomItem}
+        key={item.id}
+      >
+        <Text>{item.name}</Text>
+      </View>
+    )
+  }
+
+  @action renderHeader () {
+    return this.roomTypes.map((item, i) => (
+      <TouchableOpacity
+        style={styles.roomTypeItem}
+        key={item.id}
+        onPress={this.changeNowType.bind(this, item.id)}
+      >
+        <Text
+          style={styles.roomTypeText}
+        >{item.name}</Text>
+      </TouchableOpacity>
+    ))
+  }
+
+  changeNowType (id) {
+    this.nowType = id
   }
 
   render () {
@@ -72,6 +110,25 @@ class BomeRooms extends React.Component {
           resizeMode={'stretch'}
           source={BG}
         >
+          <View style={styles.body}>
+            <View
+              style={styles.roomTypes}
+            >
+              {
+                this.renderHeader()
+              }
+            </View>
+            <View style={styles.roomBody}>
+              <FlatList
+                numColumns={4}
+                data={this.rooms[this.nowType]}
+                renderItem={this.renderRoom}
+                extraData={this.rooms[this.nowType]}
+                keyExtractor={(item) => item.id.toString()}
+              />
+            </View>
+
+          </View>
           <TouchableOpacity
             onPress={closeModal}
             style={styles.close}
@@ -81,9 +138,6 @@ class BomeRooms extends React.Component {
               style={styles.closeImg}
             />
           </TouchableOpacity>
-          <View style={styles.body}>
-
-          </View>
         </ImageBackground>
       </Modal>
     )
@@ -117,6 +171,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     backgroundColor:'rgba(0,0,0,0)',
+    margin: 10,
     position: 'relative',
     left: 0,
     top: 0
@@ -129,8 +184,41 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    backgroundColor: '#fff',
-    height: '100%'
+    margin: 20,
+    width: "90%",
+    backgroundColor: 'rgba(255,255,255,.5)',
+    marginTop: '8%',
+    marginBottom: 20
+  },
+  roomTypes: {
+    height: 50,
+    width: '100%',
+    flexDirection: 'row'
+  },
+  roomBody: {
+    flexDirection: 'row',
+    flex: 1
+  },
+  roomTypeItem: {
+    flex: 1,
+    height: 50,
+    borderRadius: 5,
+    backgroundColor: '#c4c203',
+    borderWidth: 1
+  },
+  roomTypeText: {
+    height: 50,
+    width: '100%',
+    lineHeight: 50,
+    textAlign: 'center',
+    color: '#fff'
+  },
+  roomItem: {
+    width: '25%',
+    height: 50,
+    borderRadius: 5,
+    backgroundColor: '#c4c203',
+    borderWidth: 1
   }
 })
 

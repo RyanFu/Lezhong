@@ -5,7 +5,8 @@ import {
   View,
   ImageBackground,
   StatusBar,
-  TouchableHighlight
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import {observer} from "mobx-react";
 import { observable, action } from "mobx";
@@ -13,10 +14,14 @@ import { observable, action } from "mobx";
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import Tips from '../components/Tips'
+import Notice from '../components/Notice'
 // import Alipay from 'react-native-yunpeng-alipay';
 
 // modal
 import GoOutModal from '../components/modal/GooutModal'
+import BomeRooms from '../components/modal/BomeRooms'
+
+import boom from '../static/img/boom.png'
 
 @observer
 class Home extends React.Component {
@@ -26,12 +31,21 @@ class Home extends React.Component {
     headerTransparent: true
   }
   @observable goOutOpen = false
+  @observable boomOpen = false
 
   @action.bound openGoOutModal () {
     this.goOutOpen = true
   }
+
   @action.bound closeGoOutModal () {
     this.goOutOpen = false
+  }
+  // 房间列表
+  @action.bound openBoomModal () {
+    this.boomOpen = true
+  }
+  @action.bound closeBoomModal () {
+    this.boomOpen = false
   }
   // onAlipay() {
   //   Alipay.pay("signed pay info string").then(function(data){
@@ -53,13 +67,24 @@ class Home extends React.Component {
         <Header
           openGoOutModal={this.openGoOutModal}
         />
-        <Tips/>
+          <Notice/>
         <View style={styles.body}>
-            <Text>主体</Text>
+            <View>
+              <TouchableOpacity
+                onPress={this.openBoomModal}
+              >
+                <Image
+                  source={boom}
+                  style={styles.boom}
+                />
+              </TouchableOpacity>
+
+            </View>
         </View>
         <Footer/>
         </ImageBackground>
         <GoOutModal closeModal={this.closeGoOutModal} open={this.goOutOpen}/>
+        <BomeRooms closeModal={this.closeBoomModal} open={this.boomOpen}/>
       </View>
     );
   }
@@ -79,9 +104,13 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 1,
-    width: '100%'
+    width: '100%',
+    alignItems: 'center'
   },
-
+  boom: {
+    width: 180,
+    height: 180
+  }
 })
 
 export default Home

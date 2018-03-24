@@ -9,6 +9,11 @@ import {
 import {observer} from "mobx-react";
 import gouOut from '../static/img/icon/goout.png'
 import userIcon from '../static/img/userIcon.jpg'
+import addIcon from '../static/img/icon/add.png'
+import goldIcon from '../static/img/icon/gold.png'
+import diamondIcon from '../static/img/icon/diamond.png'
+import msg from '../static/img/icon/msg.png'
+import setIcon from '../static/img/icon/set.png'
 
 import LinearGradient from 'react-native-linear-gradient'
 
@@ -45,18 +50,24 @@ class Header extends React.Component {
             </View>
           </View>
           <View style={styles.goldView}>
-            <Image source={require('../static/img/weixin.png')} style={styles.goldImg}/>
-            <Text style={styles.username}>名称</Text>
+            <Image source={goldIcon} style={styles.goldImg}/>
+            <View style={styles.gold}>
+              <Text style={styles.goldNumber}>13245</Text>
+              <Image source={addIcon} style={styles.addIcon}/>
+            </View>
           </View>
-          <View style={styles.diamondView}>
-            <Image source={require('../static/img/weixin.png')} style={styles.goldImg}/>
-            <Text style={styles.username}>名称</Text>
+          <View style={styles.goldView}>
+            <Image source={diamondIcon} style={styles.goldImg}/>
+            <View style={styles.gold}>
+              <Text style={styles.goldNumber}>13245</Text>
+              <Image source={addIcon} style={styles.addIcon}/>
+            </View>
           </View>
           <View style={styles.messageView}>
-            <Text>站内信</Text>
+            <Image source={msg} style={styles.msgImg}/>
           </View>
-          <View style={styles.messageView}>
-            <Text>设置</Text>
+          <View style={styles.setView}>
+            <Image source={setIcon} style={styles.setIcon}/>
           </View>
         </LinearGradient>
       </View>
@@ -105,24 +116,63 @@ const styles = StyleSheet.create({
   },
   goOutView: {
     flexDirection: 'row',
-    width: 100
+    width: 50
   },
-
   goldView: {
     flexDirection: 'row',
-    flex: 1
+    flex: 1,
+    height: 24,
+    backgroundColor: 'rgba(0,0,0,.2)',
+    borderRadius: 25,
+    marginRight: 10,
+    marginTop: 3
+  },
+  gold: {
+    flex: 1,
+    flexDirection: 'row',
+    height: 24
+  },
+  goldImg: {
+    width: 24,
+    height: 24
+  },
+  goldNumber: {
+    flex: 1,
+    height: 24,
+    color: '#fff',
+    lineHeight: 24,
+    textAlign: 'center'
+  },
+  addIcon: {
+    width: 16,
+    height: 16,
+    margin: 4
   },
   diamondView: {
     flexDirection: 'row',
     flex: 1
   },
   messageView: {
-    width: 50
+    flexDirection: 'row',
+    width: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  goldImg: {
+  msgImg: {
     width: 30,
-    height: 30
+    height: 30,
+    margin: 0
   },
+  setView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: 40,
+    justifyContent: 'center'
+  },
+  setIcon: {
+    width: 24,
+    height: 24
+  }
 })
 
 export default Header

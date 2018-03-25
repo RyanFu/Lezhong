@@ -2,7 +2,9 @@ package com.lezhong;
 
 import android.app.Application;
 
+import cn.reactnative.modules.update.UpdateContext;
 import com.facebook.react.ReactApplication;
+import cn.reactnative.modules.update.UpdatePackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.github.yamill.orientation.OrientationPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -26,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new UpdatePackage(),
             new LinearGradientPackage(),
             new OrientationPackage(),
             new SplashScreenReactPackage()
@@ -36,12 +39,17 @@ public class MainApplication extends Application implements ReactApplication {
     protected String getJSMainModuleName() {
       return "index";
     }
+    @Override
+       protected String getJSBundleFile() {
+           return UpdateContext.getBundleUrl(MainApplication.this);
+       }
   };
 
   @Override
   public ReactNativeHost getReactNativeHost() {
     return mReactNativeHost;
   }
+
 
   @Override
   public void onCreate() {

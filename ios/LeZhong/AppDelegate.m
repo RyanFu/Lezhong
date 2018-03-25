@@ -13,6 +13,7 @@
 #import <React/RCTRootView.h>
 #import "SplashScreen.h"  // here
 #import "Orientation.h" // <--- import
+#import "RCTHotUpdate.h" // hot update
 
 @implementation AppDelegate
 
@@ -20,8 +21,14 @@
 {
   NSURL *jsCodeLocation;
 
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-
+    #if DEBUG
+      // 原来的jsCodeLocation保留在这里
+      jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+    #else
+      // 非DEBUG情况下启用热更新
+      jsCodeLocation=[RCTHotUpdate bundleURL];
+    #endif
+  //
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"LeZhong"
                                                initialProperties:nil

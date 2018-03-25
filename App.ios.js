@@ -21,6 +21,9 @@ import WelCome from './views/Welcome'
 import Forget from './views/Forget'
 import Registered from './views/Registered'
 
+// update
+// import UpdateModal from './UpdateModal'
+
 const RootStack = StackNavigator({
     WelCome: {
       screen: WelCome

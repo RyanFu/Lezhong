@@ -20,7 +20,7 @@ import LinearGradient from 'react-native-linear-gradient'
 @observer
 class Header extends React.Component {
   render () {
-    const {openGoOutModal} = this.props
+    const { openGoOutModal, openRechargeModal } = this.props
     return (
       <View style={styles.header}>
         <LinearGradient
@@ -51,10 +51,13 @@ class Header extends React.Component {
           </View>
           <View style={styles.goldView}>
             <Image source={goldIcon} style={styles.goldImg}/>
-            <View style={styles.gold}>
+            <TouchableOpacity
+              style={styles.gold}
+              onPress={openRechargeModal}
+            >
               <Text style={styles.goldNumber}>13245</Text>
               <Image source={addIcon} style={styles.addIcon}/>
-            </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.goldView}>
             <Image source={diamondIcon} style={styles.goldImg}/>

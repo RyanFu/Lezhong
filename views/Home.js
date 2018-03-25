@@ -20,6 +20,7 @@ import Notice from '../components/Notice'
 // modal
 import GoOutModal from '../components/modal/GooutModal'
 import BomeRooms from '../components/modal/BomeRooms'
+import RechargeModal from '../components/modal/RechargeModal'
 
 import boom from '../static/img/boom.png'
 
@@ -32,6 +33,7 @@ class Home extends React.Component {
   }
   @observable goOutOpen = false
   @observable boomOpen = false
+  @observable rechargeOpen = false
 
   @action.bound openGoOutModal () {
     this.goOutOpen = true
@@ -46,6 +48,14 @@ class Home extends React.Component {
   }
   @action.bound closeBoomModal () {
     this.boomOpen = false
+  }
+
+  // 充值入口
+  @action.bound openRechargeModal () {
+    this.rechargeOpen = true
+  }
+  @action.bound closeRechargeModal () {
+    this.rechargeOpen = false
   }
   // onAlipay() {
   //   Alipay.pay("signed pay info string").then(function(data){
@@ -66,6 +76,7 @@ class Home extends React.Component {
         />
         <Header
           openGoOutModal={this.openGoOutModal}
+          openRechargeModal={this.openRechargeModal}
         />
           <Notice/>
         <View style={styles.body}>
@@ -85,6 +96,7 @@ class Home extends React.Component {
         </ImageBackground>
         <GoOutModal closeModal={this.closeGoOutModal} open={this.goOutOpen}/>
         <BomeRooms closeModal={this.closeBoomModal} open={this.boomOpen}/>
+        <RechargeModal closeModal={this.closeRechargeModal} open={this.rechargeOpen}/>
       </View>
     );
   }

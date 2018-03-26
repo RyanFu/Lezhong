@@ -4,6 +4,7 @@ import android.app.Application;
 
 import cn.reactnative.modules.update.UpdateContext;
 import com.facebook.react.ReactApplication;
+import com.yunpeng.alipay.AlipayPackage;
 import cn.reactnative.modules.update.UpdatePackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.github.yamill.orientation.OrientationPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new AlipayPackage(),
             new UpdatePackage(),
             new LinearGradientPackage(),
             new OrientationPackage(),
@@ -40,9 +42,9 @@ public class MainApplication extends Application implements ReactApplication {
       return "index";
     }
     @Override
-       protected String getJSBundleFile() {
-           return UpdateContext.getBundleUrl(MainApplication.this);
-       }
+    protected String getJSBundleFile() {
+       return UpdateContext.getBundleUrl(MainApplication.this);
+    }
   };
 
   @Override

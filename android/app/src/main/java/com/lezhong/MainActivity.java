@@ -10,6 +10,8 @@ import com.facebook.react.ReactActivity;
 import android.content.Intent; // <--- import
 import android.content.res.Configuration; // <--- import
 
+import com.yunpeng.alipay.AlipayPackage; // <--- 支付宝
+
 public class MainActivity extends ReactActivity {
 
     /**

@@ -15,6 +15,8 @@ import closeIcon from "../../static/img/icon/close.png";
 import goldIcon from '../../static/img/icon/gold.png'
 import Modal from 'react-native-simple-modal'
 
+import api from '../../api'
+
 import { observable, action } from "mobx";
 
 @observer
@@ -47,8 +49,14 @@ class RechargeModal extends React.Component {
     )
   }
 
-  onPay (value) {
-
+  async onPay (value) {
+    try {
+      // 注意这里的await语句，其所在的函数必须有async关键字声明
+      let response = await api.getPay()
+      console.log(response)
+    } catch(error) {
+      console.error(error);
+    }
   }
   render () {
     const { open, closeModal } = this.props

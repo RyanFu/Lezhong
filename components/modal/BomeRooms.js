@@ -55,15 +55,18 @@ class BomeRooms extends React.Component {
     {id: 3, name: '高级场（100-500）'},
     {id: 4, name: '至尊场（500-2000）'}
   ]
-
-  renderRoom ({item}) {
+  goRoom () {
+    this.props.navigation.navigate('ChatRoom')
+  }
+  @action.bound renderRoom ({item}) {
     return (
-      <View
+      <TouchableOpacity
         style={styles.roomItem}
         key={item.id}
+        onPress={this.goRoom.bind(item.id)}
       >
         <Text>{item.name}</Text>
-      </View>
+      </TouchableOpacity>
     )
   }
 
@@ -122,7 +125,7 @@ class BomeRooms extends React.Component {
               <FlatList
                 numColumns={4}
                 data={this.rooms[this.nowType]}
-                renderItem={this.renderRoom}
+                renderItem={this.renderRoom.bind(this)}
                 extraData={this.rooms[this.nowType]}
                 keyExtractor={(item) => item.id.toString()}
               />

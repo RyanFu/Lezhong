@@ -20,6 +20,7 @@ import Home from './views/Home'
 import WelCome from './views/Welcome'
 import Forget from './views/Forget'
 import Registered from './views/Registered'
+import ChatRoom from './views/ChatRoom'
 
 // update
 // import UpdateModal from './UpdateModal'
@@ -35,7 +36,8 @@ const RootStack = StackNavigator({
       screen: Registered
     },
     Forget: {screen: Forget},
-    Home: {screen: Home}
+    Home: {screen: Home},
+    ChatRoom: {screen: ChatRoom}
   },
   {
     initialRouteName: 'Home',

@@ -18,6 +18,9 @@ import { observable, action } from "mobx";
 
 @observer
 class BomeRooms extends React.Component {
+  constructor (props) {
+    super(props)
+  }
   @observable rooms = {
     1: [
       {id: 11, name: '5-10包/1-2倍'},
@@ -55,15 +58,15 @@ class BomeRooms extends React.Component {
     {id: 3, name: '高级场（100-500）'},
     {id: 4, name: '至尊场（500-2000）'}
   ]
-  goRoom () {
-    this.props.navigation.navigate('ChatRoom')
+  goRoom (id) {
+    this.props.navigate('ChatRoom')
   }
-  @action.bound renderRoom ({item}) {
+  renderRoom ({item}) {
     return (
       <TouchableOpacity
         style={styles.roomItem}
         key={item.id}
-        onPress={this.goRoom.bind(item.id)}
+        onPress={this.goRoom.bind(this, item.id)}
       >
         <Text>{item.name}</Text>
       </TouchableOpacity>

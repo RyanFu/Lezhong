@@ -65,6 +65,7 @@ class Home extends React.Component {
   //   })
   // }
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
         <ImageBackground
@@ -95,7 +96,7 @@ class Home extends React.Component {
         <Footer/>
         </ImageBackground>
         <GoOutModal closeModal={this.closeGoOutModal} open={this.goOutOpen}/>
-        <BomeRooms closeModal={this.closeBoomModal} open={this.boomOpen}/>
+        <BomeRooms navigate={navigate.bind(this)} closeModal={this.closeBoomModal} open={this.boomOpen}/>
         <RechargeModal closeModal={this.closeRechargeModal} open={this.rechargeOpen}/>
       </View>
     );

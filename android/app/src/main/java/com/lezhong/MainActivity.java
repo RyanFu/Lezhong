@@ -1,6 +1,7 @@
 package com.lezhong;
 // 启动页
 import android.os.Bundle; // here
+
 // react-native-splash-screen >= 0.3.1
 import org.devio.rn.splashscreen.SplashScreen; // here
 // react-native-splash-screen < 0.3.1
@@ -10,7 +11,8 @@ import com.facebook.react.ReactActivity;
 import android.content.Intent; // <--- import
 import android.content.res.Configuration; // <--- import
 
-import com.yunpeng.alipay.AlipayPackage; // <--- 支付宝
+import cn.idealsense.reactnative.alipay.AlipayPackage;// <--- 支付宝
+import com.alipay.sdk.app.EnvUtils;
 
 public class MainActivity extends ReactActivity {
 
@@ -25,6 +27,7 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SplashScreen.show(this);  // here
+        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
         super.onCreate(savedInstanceState);
     }
     @Override

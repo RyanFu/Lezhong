@@ -150,7 +150,7 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-yunpeng-alipay')
+    compile project(':react-native-nova-alipay')
     compile project(':react-native-update')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-orientation')

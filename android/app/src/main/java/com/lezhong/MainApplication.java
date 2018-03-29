@@ -4,7 +4,7 @@ import android.app.Application;
 
 import cn.reactnative.modules.update.UpdateContext;
 import com.facebook.react.ReactApplication;
-import com.yunpeng.alipay.AlipayPackage;
+import cn.idealsense.reactnative.alipay.AlipayPackage;
 import cn.reactnative.modules.update.UpdatePackage;
 import com.BV.LinearGradient.LinearGradientPackage;
 import com.github.yamill.orientation.OrientationPackage;

@@ -1,6 +1,6 @@
 rootProject.name = 'LeZhong'
-include ':react-native-yunpeng-alipay'
-project(':react-native-yunpeng-alipay').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-yunpeng-alipay/android')
+include ':react-native-nova-alipay'
+project(':react-native-nova-alipay').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-nova-alipay/android')
 include ':react-native-update'
 project(':react-native-update').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-update/android')
 include ':react-native-linear-gradient'

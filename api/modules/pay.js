@@ -1,7 +1,7 @@
 import service from '../service'
 
 export default {
-  getPay () {
-    return service.get('https://facebook.github.io/react-native/movies.json')
+  getPay (payload) {
+    return service.post('http://wengyukunmm.6655.la/orders', payload)
   }
 }

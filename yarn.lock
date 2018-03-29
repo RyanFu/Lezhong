@@ -5005,6 +5005,10 @@ react-native-linear-gradient@^2.4.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-nova-alipay@^1.1.0:
+  version "1.1.0"
+  resolved "http://registry.npm.taobao.org/react-native-nova-alipay/download/react-native-nova-alipay-1.1.0.tgz#cf8158179e4f282f9bc107d5cb5acf64e12e693e"
+
 react-native-orientation@^3.1.3:
   version "3.1.3"
   resolved "http://registry.npm.taobao.org/react-native-orientation/download/react-native-orientation-3.1.3.tgz#d45803841fe94b6cce9acbe904fd5ca191a3711e"

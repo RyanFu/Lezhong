@@ -14,6 +14,7 @@ import BG from "../../static/img/modal/modal.png";
 import closeIcon from "../../static/img/icon/close.png";
 import goldIcon from '../../static/img/icon/gold.png'
 import Modal from 'react-native-simple-modal'
+import Alipay from 'react-native-nova-alipay'
 
 import api from '../../api'
 
@@ -52,8 +53,20 @@ class RechargeModal extends React.Component {
   async onPay (value) {
     try {
       // 注意这里的await语句，其所在的函数必须有async关键字声明
-      let response = await api.getPay()
-      console.log(response)
+      let res = await api.getPay({
+        "remarks":"老板充值50！",
+        "title":"充值50块钱先",
+        "money":"RMB50",
+        "type":"alipay"
+      })
+      console.log(res)
+      Alipay.pay(res.data.payInfo)
+        .then(() => {
+          console.log(data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     } catch(error) {
       console.error(error);
     }

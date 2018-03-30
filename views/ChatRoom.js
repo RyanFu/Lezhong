@@ -2,26 +2,84 @@ import React, {Component} from 'react';
 import {
   Text,
   View,
+  BackAndroid
 } from 'react-native';
 import Button from 'apsl-react-native-button'
+import Orientation from "react-native-orientation"
+import { GiftedChat } from 'react-native-gifted-chat'
+import { observer } from "mobx-react";
+import { observable, action } from "mobx";
+import defaultAvatar from '../static/img/defualtAvatar.png'
 
+@observer
 class WelCome extends React.Component {
-  static navigationOptions = {
-    title: '开始'
+  @observable.ref messages = [
+    {
+      _id: 2,
+      text: 'Hello developer',
+      createdAt: new Date(),
+      user: {
+        _id: 1,
+        name: 'React Native',
+        avatar: defaultAvatar,
+      },
+    },
+  ]
+  @observable
+  @action.bound onSend(messages = []) {
+    this.messages = GiftedChat.append(this.messages, messages)
   }
 
+  static navigationOptions = {
+    title: 'Home',
+    headerTransparent: true,
+    headerStyle: {
+      backgroundColor: '#f4511e',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    }
+  }
+  disableSelectionMode () {
+    if (this.isSelectionModeEnabled()) {
+      this.disableSelectionMode();
+      return true;
+    } else {
+      return false;
+    }
+  }
+  onBackButtonPressAndroid = () => {
+    this.disableSelectionMode();
+    return true;
+  }
+  componentWillMount() {
+    const initial = Orientation.getOrientation((err, orientation) => {
+      if (!err && orientation !== 'PORTRAIT') {
+        Orientation.lockToPortrait()
+      }
+    });
+  }
+  componentDidMount() {
+    if (Platform.OS === 'android') {
+      BackAndroid.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
+    }
+  }
+
+  componentWillUnmount() {
+    if (Platform.OS === 'android') {
+      BackAndroid.removeEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
+    }
+  }
   render() {
-    const { navigate } = this.props.navigation;
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={{fontSize: 30, color: 'red'}}>欢迎XXX</Text>
-        <View style={{padding: 10, width: "100%"}}>
-          <Button style={{backgroundColor: 'red', borderColor: 'rgba(0,0,0,0)'}}
-                  onPress={() => navigate('Login')}
-                  textStyle={{fontSize: 18, color: "#fff"}}>已有账号</Button>
-          <Button  textStyle={{fontSize: 18}}>注册</Button>
-        </View>
-      </View>
+      <GiftedChat
+        messages={this.messages}
+        onSend={messages => this.onSend(messages)}
+        user={{
+          _id: 1,
+        }}
+      />
     );
   }
 }

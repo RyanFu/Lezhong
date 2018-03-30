@@ -45,8 +45,7 @@ const RootStack = StackNavigator({
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
-      },
-      header: null
+      }
     },
   }
 )

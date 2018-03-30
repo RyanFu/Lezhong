@@ -23,13 +23,17 @@ import BomeRooms from '../components/modal/BomeRooms'
 import RechargeModal from '../components/modal/RechargeModal'
 
 import boom from '../static/img/boom.png'
+import Orientation from "react-native-orientation";
 
 @observer
 class Home extends React.Component {
-  static navigationOptions = {
-    title: '',
-    header: null,
-    headerTransparent: true
+  static navigationOptions = () => {
+    console.log(1232)
+    return {
+      title: '',
+      header: null,
+      headerTransparent: true
+    }
   }
   @observable goOutOpen = false
   @observable boomOpen = false
@@ -64,7 +68,26 @@ class Home extends React.Component {
   //     console.log(err);
   //   })
   // }
+
+  componentWillMount () {
+    Orientation.getOrientation((err, orientation) => {
+      if (!err) {
+        console.log(orientation)
+        if (orientation === 'PORTRAIT') {
+          Orientation.lockToLandscapeRight()
+        }
+      }
+    });
+  }
   render() {
+    Orientation.getOrientation((err, orientation) => {
+      if (!err) {
+        console.log(orientation)
+        if (orientation === 'PORTRAIT') {
+          Orientation.lockToLandscapeRight()
+        }
+      }
+    });
     const {navigate} = this.props.navigation;
     return (
       <View style={styles.container}>
@@ -72,15 +95,15 @@ class Home extends React.Component {
           style={styles.bg}
           source={require('../static/img/home-bg4.jpg')}
         >
-        <StatusBar
-          hidden={true}
-        />
-        <Header
-          openGoOutModal={this.openGoOutModal}
-          openRechargeModal={this.openRechargeModal}
-        />
+          <StatusBar
+            hidden={true}
+          />
+          <Header
+            openGoOutModal={this.openGoOutModal}
+            openRechargeModal={this.openRechargeModal}
+          />
           <Notice/>
-        <View style={styles.body}>
+          <View style={styles.body}>
             <View>
               <TouchableOpacity
                 onPress={this.openBoomModal}
@@ -92,8 +115,8 @@ class Home extends React.Component {
               </TouchableOpacity>
 
             </View>
-        </View>
-        <Footer/>
+          </View>
+          <Footer/>
         </ImageBackground>
         <GoOutModal closeModal={this.closeGoOutModal} open={this.goOutOpen}/>
         <BomeRooms navigate={navigate.bind(this)} closeModal={this.closeBoomModal} open={this.boomOpen}/>
